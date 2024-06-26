@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estiloregistrar.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="acceder.html">Login</a></li>
+            <li><a href="foro.html">Foro</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="registrar.html">Registrar</a></li>
+        </ul>
+    </nav>
+
+    <h2>Formulario de Registro a Cursos</h2>
+
+    <form id="FormularioRegistrar" action="/guardar_curso" method="post">
+    
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+
+        <div>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido">
+        </div>
+
+        <div>
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" placeholder="micorreo@email.com">
+        </div>
+
+        <div>
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Calle 123">
+        </div>
+        
+        <div>
+            <label for="cursos">Cursos:</label>
+            <select id="cursos" name="cursos">
+                <option value="" disabled selected>Selecciona un curso</option>
+                <option value="Diseño Web Responsivo">Diseño Web Responsivo</option>
+                <option value="Base de datos Relacionales">Base de datos Relacionales</option>
+                <option value="Desarrollo BackEnd y APIs">Desarrollo Back End y APIs</option>
+            </select>
+        </div>
+     
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script src="js/accesoRegistrar.js"></script>
+</body>
+</html>

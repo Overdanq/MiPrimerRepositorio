@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estiloacceder.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="acceder.html">Login</a></li>
+            <li><a href="foro.html">Foro</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="registrar.html">Registrar</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Formulario Login</h1>
+    
+    <form id="FormularioLogin" action="/guardar_curso" method="post">
+    
+        <div>
+            <input type="text" id="usuario" name="usuario" required placeholder="Usuario">
+        </div>
+
+        <div>
+            <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña">
+        </div>
+      
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script src="js/accesoLogin.js"></script>
+</body>
+</html>

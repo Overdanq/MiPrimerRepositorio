@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadatos del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/estilomodificar.css"> 
+    <title>Modificar datos del usuario</title> 
+</head>
+<body>
+    <h2>Modificar datos del usuario</h2> 
+    <form id="modificar-form" action="/modificar_datos" method="POST"> 
+        <input type="hidden" id="usuario-id" name="id"> 
+        <div>
+            <label for="nombre">Nombre:</label> 
+            <input type="text" id="nombre" name="nombre"> 
+        </div> 
+        <div>
+            <label for="apellido">Apellido:</label> 
+            <input type="text" id="apellido" name="apellido"> 
+        </div>
+        <div>
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" placeholder="micorreo@email.com">
+        </div>
+        <div>
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Calle 123"> 
+        </div>
+        <div>
+            <label for="cursos">Cursos:</label>
+            <select id="cursos" name="cursos">
+                <option value="" disabled selected>Selecciona un curso</option>
+                <option value="Diseño Web Responsivo">Diseño Web Responsivo</option>
+                <option value="Base de datos Relacionales">Base de datos Relacionales</option>
+                <option value="Desarrollo Back End y APIs">Desarrollo Back End y APIs</option>
+            </select>
+        </div> 
+     
+        <button type="submit">Guardar Cambios</button> <!-- Botón para enviar el formulario -->
+    </form>
+  
+    <script>
+        // Obtener el ID del usuario de la URL
+        const urlParams = new URLSearchParams(window.location.search); // Crea un objeto URLSearchParams para trabajar con los parámetros de la URL
+        const usuarioId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
+        // Obtener el formulario y los campos
+        const modificarForm = document.getElementById('modificar-form'); // Obtiene el formulario por su ID
+        const idInput = document.getElementById('usuario-id'); // Obtiene el campo oculto de ID
+        const nombreInput = document.getElementById('nombre'); // Obtiene el campo de nombre
+        const apellidoInput = document.getElementById('apellido'); // Obtiene el campo de apellido
+        const correoInput = document.getElementById('correo'); // Obtiene el campo de correo
+        const direccionInput = document.getElementById('direccion'); // Obtiene el campo de direccion
+        const cursosInput = document.getElementById('cursos'); // Obtiene el campo de cursos
+
+
+        // Rellenar el formulario con los datos del usuario correspondiente
+        fetch('/cursos/' + usuarioId) // Realiza una solicitud para obtener los datos del usuario con el ID especificado
+            .then(response => response.json()) // Convierte la respuesta en un objeto JSON
+            .then(usuario => {
+                // Asigna los datos obtenidos a los campos del formulario
+                idInput.value = usuario.id;
+                nombreInput.value = usuario.nombre;
+                apellidoInput.value = usuario.apellido;
+                correoInput.value = usuario.correo;
+                direccionInput.value = usuario.direccion;
+                cursosInput.value = usuario.cursos;
+            })
+   // Muestra un error en la consola si la solicitud falla
+    </script>
+
+<script src="js/accesoModificar.js"></script>
+</body>

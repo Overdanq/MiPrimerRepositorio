@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilotabla.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="acceder.html">Login</a></li>
+            <li><a href="foro.html">Foro</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="registrar.html">Registrar</a></li>
+        </ul>
+    </nav>
+    <h2>Listar Datos Alumnos Registrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Cursos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cursos-list"></tbody>
+    </table>
+
+    <script>
+        // Función para cargar los cursos al cargar la página
+        window.onload = function () {
+            // Realizar una solicitud GET a la ruta /cursos
+            fetch('/cursos')
+            // Procesar la respuesta como JSON
+            .then(function(response) {
+                return response.json();
+            })
+            // Cuando se obtienen los datos JSON
+            .then(function(data) {
+                // Obtener una referencia al elemento HTML con el ID 'cursos-list'
+                var cursosList = document.getElementById('cursos-list');
+                // Iterar sobre cada curso en los datos recibidos
+                data.forEach(function(curso) {
+                    // Crear una nueva fila de tabla
+                    var row = document.createElement('tr');
+                    // Establecer el contenido HTML de la fila con los datos del usuario
+                    row.innerHTML = '<td>' + curso.nombre + '</td>' +
+                                    '<td>' + curso.apellido + '</td>' +
+                                    '<td>' + curso.correo + '</td>' +
+                                    '<td>' + curso.direccion + '</td>' +
+                                    '<td>' + curso.cursos + '</td>' +
+                                    '<td>' +
+                                        '<button onclick="eliminarCurso(' + curso.id + ')">Eliminar</button>' +
+                                        '<button onclick="modificarUsuario(' + curso.id + ')">Modificar</button>' +
+                                    '</td>';
+                    cursosList.appendChild(row);
+                });
+            });
+        };
+    </script>
+
+    <script>
+        // Función para eliminar un usuario
+        function eliminarCurso(id) {
+            fetch('/eliminar_usuario/' + id, {
+                method: 'DELETE'
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    console.log('Estimado admin., usted ha eliminado correctamente al usuario .');
+                    // Actualizar la tabla después de eliminar el usuario
+                    window.location.reload();
+                } else {
+                    console.error('Error al eliminar el usuario.');
+                }
+            })
+            .catch(function(error) {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    </script>
+
+    <script>
+        // Función para modificar datos de un usuario
+        function modificarUsuario(id) {
+            // Redirigir a la página de modificación de usuario con el ID correspondiente
+            window.location.href = '/modificar_datos.html?id=' + id;
+        }
+    </script>
+
+</body>
+</html>
